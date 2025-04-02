@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    @apply min-h-screen bg-gradient-to-br from-[#131B4B] to-[#131B4B];
+}
+
+@layer utilities {
+    .font-roboto {
+      font-family: 'Roboto', sans-serif;
+    }
+}
+
+h1 {
+    @apply block text-2xl font-bold leading-tight;
+}
+
+article h1,
+aside h1,
+nav h1,
+section h1 {
+    @apply text-xl mt-[0.83em] mb-[0.83em];
+}
+.tex{
+    color: white !important;
+}
