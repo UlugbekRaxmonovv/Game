@@ -31,7 +31,7 @@ const Register = () => {
   return (
     <div className="flex justify-center items-center min-h-screen ">
      <ProductTop/>
-      <Card className=" max-w-md p-2 shadow-lg rounded-lg bg-light-white backdrop-blur-[15px] w-full h-full">
+      <Card className=" max-w-md p-2 shadow-lg rounded-lg bg-light-white backdrop-blur-[15px]  w-[400px] h-full">
       <Title level={3} className="tex text-center  text-2xl font-semibold z-50">
           Ro‘yxatdan o‘tish
         </Title>
@@ -44,13 +44,14 @@ const Register = () => {
             <Input
               prefix={<UserOutlined className="text-gray-400" />}
               placeholder="Foydalanuvchi nomi"
-              className="h-10 rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="h-10"
             />
           </Form.Item>
 
           <Form.Item
             label={<Text className="text-white">Email</Text>}
             name="email"
+            
             rules={[
               { required: true, message: "Emailni kiriting!" },
               { type: "email", message: "To‘g‘ri email formatini kiriting!" },
@@ -59,7 +60,7 @@ const Register = () => {
             <Input
               prefix={<MailOutlined className="text-gray-400" />}
               placeholder="Email"
-              className="h-10 rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="h-10"
             />
           </Form.Item>
 
@@ -71,8 +72,8 @@ const Register = () => {
             <Input.Password
               prefix={<LockOutlined className="text-gray-400" />}
               placeholder="Parol"
+              className="h-10"
               iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-              className="h-10 rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
           </Form.Item>
 
@@ -80,6 +81,7 @@ const Register = () => {
             label={<Text className="text-white">Parolni tasdiqlang</Text>}
             name="confirmPassword"
             dependencies={["password"]}
+            
             rules={[
               { required: true, message: "Parolni tasdiqlang!" },
               ({ getFieldValue }) => ({
@@ -95,8 +97,8 @@ const Register = () => {
             <Input.Password
               prefix={<LockOutlined className="text-gray-400" />}
               placeholder="Parolni tasdiqlang"
+              className="h-10"
               iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-              className="h-10 rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
           </Form.Item>
 
@@ -104,11 +106,10 @@ const Register = () => {
             <Button
               type="primary"
               htmlType="submit"
-              block
+             className="h-10"
               loading={loading}
-              className="h-12 text-lg font-semibold bg-blue-600 hover:bg-blue-700 transition rounded-md shadow-md"
             >
-              Ro‘yxatdan o‘tish
+              {loading ? "Yuklanmoqda..." : "Ro'yhatdan o'tish"}
             </Button>
           </Form.Item>
         </Form>

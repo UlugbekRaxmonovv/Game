@@ -1,34 +1,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/index";
 import { Box, Typography } from "@mui/material";
 import { Form, Button, Input, message } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  UserOutlined,
+  LockOutlined,
+} from "@ant-design/icons";
 
 const Login = () => {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const onFinish = async () => {
+  const onFinish = async (values) => {
     setLoading(true);
-    
     try {
-      const response = await axios.post(`${apiUrl}/api/login/`, values);
-      localStorage.setItem("token", response.data.access);
-      localStorage.setItem("isAuth", "true");
-      message.success("Muvaffaqiyatli tizimga kirdingiz!");
-      navigate("/dashboard");
+      const response = await axios.post("/login", {
+        email: values.email,
+        password: values.password,
+      });
+
+      if (response.data?.accessToken) {
+        localStorage.setItem("x-auth-token", response.data?.accessToken);
+        localStorage.setItem("user", response.data?.user?.email);
+        toast.success("Muvaffaqiyatli kirildi");
+        console.log(response.data?.accessToken);
+        navigate("/dashboard/statestika");
+      } else {
+        toast.error("Login yoki parol notog'ri");
+      }
     } catch (error) {
-      message.error("Login yoki parol noto‘g‘ri!");
+      console.error("Xato:", error);
+      toast.error("Server bilan bog'lanishda xatolik yuz berdi");
     } finally {
       setLoading(false);
     }
   };
 
-  if (localStorage.getItem("isAuth") === "true") {
-    navigate("/dashboard");
-  }
+  
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+    toast.error("Iltimos, barcha kerakli maydonlarni to'g'ri to'ldiring");
+  };
 
   return (
     <Box
@@ -51,18 +66,23 @@ const Login = () => {
           backgroundColor: "rgba(255, 255, 255, 0.2)",
           backdropFilter: "blur(10px)",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-          textAlign: "center",
         }}
       >
-        <Typography variant="h5" sx={{ color: "white", mb: 3 }}>
+        <Typography variant="h5" sx={{ color: "white", mb: 3,textAlign:'center' }}>
           Tizimga kirish
         </Typography>
 
-        <Form onFinish={onFinish} layout="vertical">
+        <Form
+          onFinish={onFinish}
+          layout="vertical"
+          onFinishFailed={onFinishFailed}
+        >
           <Form.Item
             label={<Typography color="white">Foydalanuvchi nomi</Typography>}
             name="username"
-            rules={[{ required: true, message: "Foydalanuvchi nomini kiriting!" }]}
+            rules={[
+              { required: true, message: "Foydalanuvchi nomini kiriting!" },
+            ]}
           >
             <Input
               prefix={<UserOutlined className="text-gray-400" />}
@@ -81,17 +101,28 @@ const Login = () => {
               prefix={<LockOutlined className="text-gray-400" />}
               placeholder="Parol"
               size="large"
-              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
             />
           </Form.Item>
 
-          <Button type="primary" htmlType="submit" block size="large" loading={loading}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            size="large"
+            loading={loading}
+          >
             {loading ? "Yuklanmoqda..." : "Kirish"}
           </Button>
         </Form>
 
         <Typography sx={{ mt: 3, color: "white" }}>
-          <span className="text-blue-300 cursor-pointer hover:underline" onClick={() => navigate("/register")}>
+          <span
+            className="text-blue-300 cursor-pointer hover:underline"
+            onClick={() => navigate("/register")}
+          >
             Ro‘yxatdan o‘tish
           </span>
         </Typography>

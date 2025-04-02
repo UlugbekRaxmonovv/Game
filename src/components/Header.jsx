@@ -39,7 +39,7 @@ const Header = () => {
           <ul className="hidden md:flex items-center gap-5">
             {[
               { to: "/login", label: "Kirish" },
-              { to: "/regestr", label: "Ro'yhatdan o'tish" },
+              { to: "/register", label: "Ro'yhatdan o'tish" },
             ].map((item) => (
               <motion.div key={item.to} whileTap={{ scale: 0.9 }}>
                 <Link
@@ -65,7 +65,7 @@ const Header = () => {
         >
           {[
             { to: "/login", label: "Kirish" },
-            { to: "/regestr", label: "Ro'yhatdan o'tish" },
+            { to: "/register", label: "Ro'yhatdan o'tish" },
           ].map((item) => (
             <Link
               key={item.to}
