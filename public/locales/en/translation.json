@@ -1,0 +1,22 @@
+{
+  "navbar": {
+    "Login": "Login",
+    "Register": "Register"
+  },
+  "main": {
+    "Kom": "Manage your computer club easily",
+    "Zam": "Automate your business with a modern solution",
+    "Boshlash": "Start"
+  },
+  "KomMo":{
+    "Kompyuter":"Computer monitoring",
+    "Monitor": "Monitor the status of all computers in real time",
+    "Band":"Booking system",
+    "Online":"Online booking and queue management",
+    "Payment":"Payment system",
+    "Automatic":"Automatic calculation and control of payments Payme Click Uzumbank",
+    "Users":"Users",
+    "Clubs":"Computer clubs",
+    "Support":"Support"
+}
+}

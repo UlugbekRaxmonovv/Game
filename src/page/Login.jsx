@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../api/index";
+import axios from "../../src/api/index";
 import { Box, Typography } from "@mui/material";
-import { Form, Button, Input, message } from "antd";
+import { Form, Button, Input } from "antd";
+import { toast } from "react-hot-toast";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
@@ -10,39 +11,46 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 
+
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
     setLoading(true);
+    const user = {
+      username: values.username,
+      password: values.password,
+    };
+
+    console.log(user);
+    
     try {
-      const response = await axios.post("/login", {
-        email: values.email,
-        password: values.password,
+      const response = await axios.post('auth/login/', user, {
+        headers: { "Content-Type": "application/json" },
       });
 
+      console.log("Server javobi:", response.data);
+
       if (response.data?.accessToken) {
-        localStorage.setItem("x-auth-token", response.data?.accessToken);
-        localStorage.setItem("user", response.data?.user?.email);
-        toast.success("Muvaffaqiyatli kirildi");
-        console.log(response.data?.accessToken);
+        localStorage.setItem("x-auth-token", response.data.accessToken);
+        localStorage.setItem("user", response.data?.user?.email || "");
+        toast.success("Muvaffaqiyatli kirildi!");
         navigate("/dashboard/statestika");
       } else {
-        toast.error("Login yoki parol notog'ri");
+        toast.error("Login yoki parol noto‘g‘ri");
       }
     } catch (error) {
       console.error("Xato:", error);
-      toast.error("Server bilan bog'lanishda xatolik yuz berdi");
+      toast.error("Server bilan bog‘lanishda xatolik yuz berdi");
     } finally {
       setLoading(false);
     }
   };
 
-  
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-    toast.error("Iltimos, barcha kerakli maydonlarni to'g'ri to'ldiring");
+    toast.error("Iltimos, barcha maydonlarni to‘g‘ri to‘ldiring!");
   };
 
   return (
@@ -68,21 +76,15 @@ const Login = () => {
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
         }}
       >
-        <Typography variant="h5" sx={{ color: "white", mb: 3,textAlign:'center' }}>
+        <Typography variant="h5" sx={{ color: "white", mb: 3, textAlign: "center" }}>
           Tizimga kirish
         </Typography>
 
-        <Form
-          onFinish={onFinish}
-          layout="vertical"
-          onFinishFailed={onFinishFailed}
-        >
+        <Form onFinish={onFinish} layout="vertical" onFinishFailed={onFinishFailed}>
           <Form.Item
             label={<Typography color="white">Foydalanuvchi nomi</Typography>}
             name="username"
-            rules={[
-              { required: true, message: "Foydalanuvchi nomini kiriting!" },
-            ]}
+            rules={[{ required: true, message: "Foydalanuvchi nomini kiriting!" }]}
           >
             <Input
               prefix={<UserOutlined className="text-gray-400" />}
@@ -101,19 +103,11 @@ const Login = () => {
               prefix={<LockOutlined className="text-gray-400" />}
               placeholder="Parol"
               size="large"
-              iconRender={(visible) =>
-                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-              }
+              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            block
-            size="large"
-            loading={loading}
-          >
+          <Button type="primary" htmlType="submit" block size="large" loading={loading}>
             {loading ? "Yuklanmoqda..." : "Kirish"}
           </Button>
         </Form>

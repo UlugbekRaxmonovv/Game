@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../src/api/index";
 import { Form, Input, Button, Typography, Card, message } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone, UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import ProductTop from  '../components/ProductTop/index'
+import ProductTop from '../components/ProductTop/index';
+
 const { Title, Text } = Typography;
 
 const Register = () => {
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
     setLoading(true);
+
+    const user = {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      password_confirm: values.password_confirm, 
+    };
+
+    console.log(user);
+
     try {
-      await axios.post(`${apiUrl}/api/register/`, {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      });
+      await axios.post(`/register/`, user);
       message.success("Ro‘yxatdan o‘tish muvaffaqiyatli yakunlandi!");
       navigate("/login");
     } catch (error) {
@@ -29,39 +35,30 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen ">
-     <ProductTop/>
-      <Card className=" max-w-md p-2 shadow-lg rounded-lg bg-light-white backdrop-blur-[15px]  w-[400px] h-full">
-      <Title level={3} className="tex text-center  text-2xl font-semibold z-50">
+    <div className="flex justify-center items-center min-h-screen">
+      <ProductTop />
+      <Card className="max-w-md p-2 shadow-lg rounded-lg bg-light-white backdrop-blur-[15px] w-[400px] h-full">
+        <Title level={3} className="tex text-center text-2xl font-semibold z-50">
           Ro‘yxatdan o‘tish
         </Title>
         <Form layout="vertical" onFinish={onFinish} className="space-y-3">
-        <Form.Item
+          <Form.Item
             label={<Text className="text-white">Foydalanuvchi nomi</Text>}
             name="username"
             rules={[{ required: true, message: "Foydalanuvchi nomini kiriting!" }]}
           >
-            <Input
-              prefix={<UserOutlined className="text-gray-400" />}
-              placeholder="Foydalanuvchi nomi"
-              className="h-10"
-            />
+            <Input prefix={<UserOutlined className="text-gray-400" />} placeholder="Foydalanuvchi nomi" className="h-10" />
           </Form.Item>
 
           <Form.Item
             label={<Text className="text-white">Email</Text>}
             name="email"
-            
             rules={[
               { required: true, message: "Emailni kiriting!" },
               { type: "email", message: "To‘g‘ri email formatini kiriting!" },
             ]}
           >
-            <Input
-              prefix={<MailOutlined className="text-gray-400" />}
-              placeholder="Email"
-              className="h-10"
-            />
+            <Input prefix={<MailOutlined className="text-gray-400" />} placeholder="Email" className="h-10" />
           </Form.Item>
 
           <Form.Item
@@ -79,9 +76,8 @@ const Register = () => {
 
           <Form.Item
             label={<Text className="text-white">Parolni tasdiqlang</Text>}
-            name="confirmPassword"
+            name="password_confirm" // Tuzatildi
             dependencies={["password"]}
-            
             rules={[
               { required: true, message: "Parolni tasdiqlang!" },
               ({ getFieldValue }) => ({
@@ -103,13 +99,8 @@ const Register = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-             className="h-10"
-              loading={loading}
-            >
-              {loading ? "Yuklanmoqda..." : "Ro'yhatdan o'tish"}
+            <Button type="primary" htmlType="submit" className="h-10" loading={loading}>
+              {loading ? "Yuklanmoqda..." : "Ro‘yxatdan o‘tish"}
             </Button>
           </Form.Item>
         </Form>
@@ -121,7 +112,6 @@ const Register = () => {
           </Text>
         </Text>
       </Card>
-     
     </div>
   );
 };

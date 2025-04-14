@@ -1,0 +1,22 @@
+{
+    "navbar":{
+        "Login":"Kirish",
+        "Register":"Roʻyxatdan oʻtish"
+    },
+    "main":{
+        "Kom":"Kompyuter klubini osongina boshqaring",
+        "Zam":"Biznesingizni zamonaviy yechim bilan avtomatlashtiring",
+        "Boshlash":"Boshlash"
+    },
+    "KomMo":{
+        "Kompyuter":"Kompyuterlar monitoringi",
+        "Monitor": "Barcha kompyuterlar holatini real vaqtda kuzating",
+        "Band":"Band qilish tizimi",
+        "Online":"Onlayn band qilish va navbat boshqaruvi",
+        "Payment":"To'lov tizimi",
+        "Automatic": "To'lovlarni avtomatik hisoblash va nazorat qilish Payme Click Uzumbank",
+        "Users":"Foydalanuvchilar",
+        "Clubs":"Kompyuter klublar",
+        "Support":"Qo'llab-quvvatlash"
+    }
+}
