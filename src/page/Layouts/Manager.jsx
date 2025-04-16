@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Layout, Menu, Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import DashboardContent from "../../components/content/Content"; 
+import DashboardContent from "../../components/Content/Content"; 
 import { FiMenu } from "react-icons/fi";
 const { Header, Sider } = Layout;
 import logo from "../../assets/Imags/dashboard.jpg";
