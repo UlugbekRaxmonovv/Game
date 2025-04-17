@@ -1,8 +1,12 @@
 import React from 'react'
+import GroupPanel from '../../../components/GroupPanel/GroupPanel'
 
 const Games = () => {
   return (
-    <div>Games</div>
+    <div>
+      
+      <GroupPanel/>
+    </div>
   )
 }
 

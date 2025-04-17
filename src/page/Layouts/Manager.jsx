@@ -7,10 +7,10 @@ import { FiMenu } from "react-icons/fi";
 const { Header, Sider } = Layout;
 import logo from "../../assets/Imags/dashboard.jpg";
 import logo1 from "../../assets/Imags/dashboard.jpg";
-import { MdOutlineAddTask } from "react-icons/md";
+import { MdOutlineAddTask, MdOutlineZoomInMap } from "react-icons/md";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { TbUsersPlus } from "react-icons/tb";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuCalendarCheck, LuLaptopMinimal  } from "react-icons/lu";
 import { HiOutlineUsers } from "react-icons/hi";
 import axios from '../../api/index'
 import { RiMoonLine, RiSunLine } from "react-icons/ri";
@@ -109,9 +109,9 @@ const Manager = () => {
       }
     ),
     getItem(
-      "Games",
+      "Gaming stations",
       "1",
-      <LuLayoutDashboard
+      <LuLaptopMinimal
         style={{ color: theme ? "white" : "black", fontSize: "18px" }}
       />,
       () => {
@@ -119,28 +119,28 @@ const Manager = () => {
         setCollapsed(!collapsed);
       }
     ),
-    // getItem(
-    //   "BlockLanganar",
-    //   "4",
-    //   <IoMdCheckboxOutline
-    //     style={{ color: theme ? "white" : "black", fontSize: "18px" }}
-    //   />,
-    //   () => {
-    //     navigate("/dashboard/blockLanganar");
-    //     setCollapsed(!collapsed);
-    //   }
-    // ),
-    // getItem(
-    //   "Employees",
-    //   "5",
-    //   <HiOutlineUsers
-    //     style={{ color: theme ? "white" : "black", fontSize: "18px" }}
-    //   />,
-    //   () => {
-    //     navigate("/dashboard/employees");
-    //     setCollapsed(!collapsed);
-    //   }
-    // ),
+    getItem(
+      "Map",
+      "4",
+      <MdOutlineZoomInMap 
+        style={{ color: theme ? "white" : "black", fontSize: "18px" }}
+      />,
+      () => {
+        navigate("/dashboard/map");
+        setCollapsed(!collapsed);
+      }
+    ),
+    getItem(
+      "Booking system",
+      "5",
+      <LuCalendarCheck 
+        style={{ color: theme ? "white" : "black", fontSize: "18px" }}
+      />,
+      () => {
+        navigate("/dashboard/bookings");
+        setCollapsed(!collapsed);
+      }
+    ),
 
     // getItem(
     //   "Managers",
@@ -224,13 +224,13 @@ const Manager = () => {
                 <img
                   src={logo1}
                   alt=""
-                  className="w-[150px] h-[150px] -mt-10 object-contain rounded-full"
+                  className="w-[100px] h-[100px] object-contain rounded-full"
                 />
               ) : (
                 <img
                   src={logo}
                   alt=""
-                  className="w-[150px] h-[150px] -mt-10 object-contain rounded-full"
+                  className="w-[100px] h-[100px]  object-contain rounded-full"
                 />
               )}
             </Link>

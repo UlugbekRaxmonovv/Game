@@ -22,36 +22,49 @@ const Login = () => {
       username: values.username,
       password: values.password,
     };
-
-    console.log(user);
-    
-    try {
-      const response = await axios.post('auth/login/', user, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      console.log("Server javobi:", response.data);
-
-      if (response.data?.accessToken) {
-        localStorage.setItem("x-auth-token", response.data.accessToken);
-        localStorage.setItem("user", response.data?.user?.email || "");
-        toast.success("Muvaffaqiyatli kirildi!");
-        navigate("/dashboard/statestika");
-      } else {
-        toast.error("Login yoki parol noto‘g‘ri");
-      }
-    } catch (error) {
-      console.error("Xato:", error);
-      toast.error("Server bilan bog‘lanishda xatolik yuz berdi");
-    } finally {
-      setLoading(false);
+  
+    if (values.username === "john32" && values.password === "87654321") {
+      toast.success("Welcome");
+      const token = "your_dummy_token"; 
+      localStorage.setItem("x-auth-token", token);
+      navigate('/dashboard/statestika');
+     
+    } else {
+      toast.error("Invalid Username or Password");
     }
   };
+  
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
     toast.error("Iltimos, barcha maydonlarni to‘g‘ri to‘ldiring!");
   };
+
+
+
+
+
+     // try {
+    //   const response = await axios.post('auth/login/', user, {
+    //     headers: { "Content-Type": "application/json" },
+    //   });
+
+    //   console.log("Server javobi:", response.data);
+
+    //   if (response.data?.accessToken) {
+    //     localStorage.setItem("x-auth-token", response.data.accessToken);
+    //     localStorage.setItem("user", response.data?.user?.email || "");
+    //     toast.success("Muvaffaqiyatli kirildi!");
+    //     navigate("/dashboard/statestika");
+    //   } else {
+    //     toast.error("Login yoki parol noto‘g‘ri");
+    //   }
+    // } catch (error) {
+    //   console.error("Xato:", error);
+    //   toast.error("Server bilan bog‘lanishda xatolik yuz berdi");
+    // } finally {
+    //   setLoading(false);
+    // }
 
   return (
     <Box

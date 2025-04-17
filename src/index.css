@@ -28,3 +28,17 @@ section h1 {
 .tex {
     color: white !important;
 }
+/* PCGrid.css */
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #3b82f6; /* Tailwind blue-500 */
+    border-radius: 4px;
+  }
+  

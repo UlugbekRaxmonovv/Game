@@ -1,9 +1,13 @@
 import { useTranslation } from "react-i18next";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const Hom = () => {
   const { t } = useTranslation();
 
   return (
+ <>
+ <Header/>
     <div className="text-center">
       <div className="text-3xl font-bold mt-[130px] text-center">
         <h2 className="text-3xl md:text-[2.5rem] mb-5 animate-fadeUp text-white text-center">
@@ -85,6 +89,8 @@ const Hom = () => {
         </section>
       </div>
     </div>
+    <Footer/>
+ </>
   );
 };
 export default Hom;
