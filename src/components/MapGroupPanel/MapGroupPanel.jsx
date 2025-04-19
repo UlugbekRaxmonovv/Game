@@ -13,30 +13,31 @@ const MapGroupPanel = () => {
   return (
     <div className="flex justify-between items-center px-4 py-4  rounded-md">
       <div className="flex gap-2 flex-wrap">
-       
-
         <Button
           type="default"
-          icon={<VscInfo style={{width: ''}} />}
+          icon={<VscInfo style={{ width: "" }} />}
           style={{
-            width:'50px',
-            height:'40px'
+            width: "50px",
+            height: "40px",
           }}
-         
         ></Button>
       </div>
 
       <div className="flex gap-2">
-        <Button type="default" onClick={() => setPcModalVisible(true)}  style={{
-            height:'40px'
-          }}>
+        <Button
+          type="default"
+          onClick={() => setPcModalVisible(true)}
+          style={{
+            height: "40px",
+          }}
+        >
           Add a PC
         </Button>
         <Button
           type="primary"
           icon={<PlusOutlined />}
           style={{
-            height:'40px'
+            height: "40px",
           }}
           onClick={() => setGroupModalVisible(true)}
         >
